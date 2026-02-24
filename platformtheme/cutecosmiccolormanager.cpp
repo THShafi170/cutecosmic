@@ -239,6 +239,11 @@ void CuteCosmicColorManager::rebuildKdeColors()
     QColor neutral = convertColor(ep.warning);
     QColor positive = convertColor(ep.success);
 
+    // Inactive colors - COSMIC doesn't seem to have a specific "inactive"
+    // palette in the same way KDE does, so we just use the same colors
+    // but with slightly reduced contrast or placeholder colors if appropriate.
+    // For now, let's keep it simple and use the same base.
+
     QSaveFile saveFile { d_kdeColorsFile->fileName() };
     if (!saveFile.open(QIODeviceBase::WriteOnly)) {
         return;

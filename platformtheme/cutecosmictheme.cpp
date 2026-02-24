@@ -236,6 +236,37 @@ QVariant CuteCosmicPlatformTheme::themeHint(ThemeHint hint) const
     return QGenericUnixTheme::themeHint(hint);
 }
 
+QList<QKeySequence> CuteCosmicPlatformTheme::keyBindings(QKeySequence::StandardKey key) const
+{
+    // https://github.com/pop-os/cosmic-comp/blob/master/src/config/shortcuts.rs
+    // COSMIC standard shortcuts use Super key for many things that are usually
+    // application-local in other environments.
+    switch (key) {
+    case QKeySequence::Quit:
+        return { QKeySequence(u"Alt+F4"_s), QKeySequence(u"Super+Q"_s) };
+    case QKeySequence::New:
+        return { QKeySequence(u"Ctrl+N"_s) };
+    case QKeySequence::Open:
+        return { QKeySequence(u"Ctrl+O"_s), QKeySequence(u"Super+O"_s) };
+    case QKeySequence::Save:
+        return { QKeySequence(u"Ctrl+S"_s), QKeySequence(u"Super+S"_s) };
+    case QKeySequence::Print:
+        return { QKeySequence(u"Ctrl+P"_s), QKeySequence(u"Super+P"_s) };
+    case QKeySequence::Close:
+        return { QKeySequence(u"Ctrl+W"_s), QKeySequence(u"Super+W"_s) };
+    case QKeySequence::Preferences:
+        return { QKeySequence(u"Ctrl+,"_s), QKeySequence(u"Super+,"_s) };
+    case QKeySequence::Find:
+        return { QKeySequence(u"Ctrl+F"_s), QKeySequence(u"Super+F"_s) };
+    case QKeySequence::HelpContents:
+        return { QKeySequence(u"F1"_s), QKeySequence(u"Super+?"_s) };
+    default:
+        break;
+    }
+
+    return QGenericUnixTheme::keyBindings(key);
+}
+
 QIconEngine* CuteCosmicPlatformTheme::createIconEngine(const QString& iconName) const
 {
     return new CuteCosmicIconEngine(iconName);

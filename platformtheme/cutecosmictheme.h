@@ -16,6 +16,7 @@
  */
 #pragma once
 
+#include <QKeySequence>
 #include <QObject>
 
 #include <memory>
@@ -68,6 +69,7 @@ public:
     const QFont* font(Font type) const override;
 
     QVariant themeHint(ThemeHint hint) const override;
+    QList<QKeySequence> keyBindings(QKeySequence::StandardKey key) const override;
 
     QIconEngine* createIconEngine(const QString& iconName) const override;
 
